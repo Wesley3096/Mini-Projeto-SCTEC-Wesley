@@ -66,20 +66,32 @@ const candidates = [
      experience : 0.4,
     },
 
-    {id: "candidate07",
-     name : "Pedro Costa",
-     skills : ["Java", "Python","Git", "GitHub"],
-     experience : 1.5,
-
-    },
-
-    {id: "candidate08",
-     name : "Fernanda Rocha",
-     skills : ["Java", "Python", "JavaScript","Jira"],
-     experience : 0.5,
-    },
-
 ]
+
+class candidate {
+    constructor (id, name, skills, experience) {
+        this.id = id;
+        this.name = name;
+        this.skills = skills;
+        this.experience = experience;
+  }
+      showinfo () {
+        console.log (`Candidato: ${this.name}, Habilidades: ${this.skills.join(", ")}, Experiência: ${this.experience} anos`);
+
+      }
+    }
+
+      class DeveloperFrontEnd extends candidate {
+        constructor (id, name, skills, experience) {
+            super (id, name, skills, experience);
+        } 
+  }
+
+  const PedroCosta = new DeveloperFrontEnd ("candidate07", "Pedro Costa", ["Java", "Python","Git", "GitHub"], 1.5);
+
+  const FernandaRocha = new DeveloperFrontEnd ("candidate08", "Fernanda Rocha", ["Java", "Python", "JavaScript","Jira"], 0.5);
+
+
 
 const filterCandidatesBySkills = (jobId) => {
 
@@ -116,7 +128,26 @@ for (const job of jobs) {
     console.log(`Candidatos aprovados: ${approvedCandidates.length}`);
     console.log('-----------------------------');
     console.log(`Candidatos aprovados para a vaga "${job.title}" na empresa: ` + ` ${job.company}`);
+
+    const calculateMatchPercentage = (candidateSkills, jobRequirements) => {
+        const matchingSkills = jobRequirements.filter(skill => candidateSkills.includes(skill));
+        return MatchPercentage = (matchingSkills.length / jobRequirements.length) * 100;
+    }
+
     approvedCandidates.forEach(candidate => {
-        console.log(`- ${candidate.name}`);
+        const percentage = calculateMatchPercentage(candidate.skills, job.requirements);
+        console.log(`- ${candidate.name} - Compatibilidade : ${percentage.toFixed(1)}%`);
+
+        if (percentage >= 80) {
+          console.log (`${candidate.name} - ${percentage.toFixed(1)}% - Alta compatibilidade`);
+        }
+
+        else if (percentage >= 50 && percentage < 80) {
+          console.log (`${candidate.name} - ${percentage.toFixed(1)}% - Média compatibilidade`);
+        }
+
+        else {
+          console.log (`${candidate.name} - ${percentage.toFixed(1)}% - Baixa compatibilidade`);
+        }
     });
-}
+  }
