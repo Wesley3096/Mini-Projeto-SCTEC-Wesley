@@ -28,7 +28,7 @@
 - Abra o VSCode
 - Execute o arquivo
 
-# Porcentual de canditados para a vaga
+# Percentual de canditados para a vaga
 - O percentual foi classificado conforme o exercício proposto.
 -80 a 100 - Alta compatibilidade.
 -50 a 80 - Média compatibilidade.

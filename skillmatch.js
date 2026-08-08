@@ -91,7 +91,8 @@ class candidate {
 
   const FernandaRocha = new DeveloperFrontEnd ("candidate08", "Fernanda Rocha", ["Java", "Python", "JavaScript","Jira"], 0.5);
 
-
+  candidates.push(PedroCosta);
+  candidates.push(FernandaRocha);
 
 const filterCandidatesBySkills = (jobId) => {
 
@@ -100,35 +101,41 @@ const filterCandidatesBySkills = (jobId) => {
     if (!job) {
         console.log("Vaga não encontrada.");
         return [];
-    
-}
-
-
-
-const approvedCandidates = candidates.filter(candidate => {
-  if (
-    candidate.experience >= job.experience &&
-    candidate.skills.includes("HTML") &&
-    candidate.skills.includes("CSS") &&
-    candidate.skills.includes("JavaScript") &&
-    candidate.skills.includes("Git") &&
-    candidate.skills.includes("GitHub")
-  ){
-    return true;
     }
-   
-});
- 
 
-  return approvedCandidates;
-}
+    const requerimentsSkill = [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Git",
+        "GitHub"
+    ];
+
+    const approvedCandidates = candidates.filter(candidate => {
+
+        const missingSkills = requerimentsSkill.filter(
+            skill => !candidate.skills.includes(skill)
+        );
+
+        if (missingSkills.length === 0) {
+            return true;
+        }
+
+        return false;
+    });
+
+    return approvedCandidates;
+};
+
 
    for (const job of jobs) {
     const approvedCandidates = filterCandidatesBySkills(job.id);
+    console.log('- - - - - - - - - - - - - - - -');
     console.log(`Vaga: ${job.title}`);
-    console.log('-----------------------------');
     console.log(`Candidatos aprovados: ${approvedCandidates.length}`);
+    console.log('-----------------------------');
     console.log(`Candidatos aprovados para a vaga "${job.title}" na empresa: ` + ` ${job.company}`);
+    console.log(' ');
 
     const calculateMatchPercentage = (candidateSkills, jobRequirements) => {
         const matchingSkills = jobRequirements.filter(skill => candidateSkills.includes(skill));
@@ -137,7 +144,7 @@ const approvedCandidates = candidates.filter(candidate => {
 
     approvedCandidates.forEach(candidate => {
         const percentage = calculateMatchPercentage(candidate.skills, job.requirements);
-     
+    
 
         if (percentage >= 80) {
           console.log (`${candidate.name} - ${percentage.toFixed(1)}% - Alta compatibilidade`);
@@ -151,14 +158,28 @@ const approvedCandidates = candidates.filter(candidate => {
           console.log (`${candidate.name} - ${percentage.toFixed(1)}% - Baixa compatibilidade - Sugiro estudar sobre as tecnologias exigidas na vaga`);
         }
   
-            const missingSkills = job.requirements.filter(skill => !candidate.skills.includes (skill));
-  console.log('-----------------------------');
-    console.log (`${candidate.name} não possui as habilidades necessárias para a vaga ${job.title} na empresa ${job.company}. Habilidades necessárias: ${missingSkills.join(",")}`);
-
-  return false;
     });
-  }
-  
+        console.log ('------------------------')
+         console.log ('Candidatos não aprovados:')
+
+         const requerimentsSkills = [
+                 "HTML",
+                 "CSS",
+                 "JavaScript",
+                 "Git",
+                 "GitHub"
+         ];
+         candidates.filter (candidate => !approvedCandidates.includes (candidate)).forEach (candidate => {
+
+          const missingSkills = requerimentsSkills.filter(
+            skill => !candidate.skills.includes(skill)
+        );
+
+          console.log (`${candidate.name}`)
+          console.log (`Faltam: ${missingSkills.join (", ")}`)
+          console.log ("-----------")
+        });
+      }
   const searchCandidateByJob = (jobId) => {
     return new Promise ((resolve) => {
     setTimeout (() => {
@@ -166,4 +187,4 @@ const approvedCandidates = candidates.filter(candidate => {
       resolve (approvedCandidates);
     }, 2000);
   });
-}
+};
