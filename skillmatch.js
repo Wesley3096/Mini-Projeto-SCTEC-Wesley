@@ -1,9 +1,11 @@
+// Criação de uma constante com os identificadores para as vagas e criação do nome das empresas (OBS:Vagas e nome das empresa fictícias).
+
 const jobs = [
    {id: "01",
     title: "Desenvolvedor Front-End Jr 1",
     company: "FrontCode",
     requirements: ["HTML", "CSS", "JavaScript", "Git", "GitHub", "Trello"],
-    experience: 1,  
+    experience: 1,
 },
         {id :"02",
         title : "Desenvolvedor Front-End Jr 2",
@@ -28,6 +30,7 @@ const jobs = [
 
 
 ];
+// Criação de candidatos para as vagas (OBS: Nomes fictícios).
 
 const candidates = [
     {id: "candidate01",
@@ -67,6 +70,7 @@ const candidates = [
     },
 
 ]
+// Criação de uma classe para verificar os requisitos de aprovação das vagas.
 
 class candidate {
     constructor (id, name, skills, experience) {
@@ -75,6 +79,7 @@ class candidate {
         this.skills = skills;
         this.experience = experience;
   }
+  
       showinfo () {
         console.log (`Candidato: ${this.name}, Habilidades: ${this.skills.join(", ")}, Experiência: ${this.experience} anos`);
 
@@ -86,6 +91,7 @@ class candidate {
             super (id, name, skills, experience);
         } 
   }
+// Criação de mais 2 constantes com candidatos usando o push.
 
   const PedroCosta = new DeveloperFrontEnd ("candidate07", "Pedro Costa", ["Java", "Python","Git", "GitHub"], 1.5);
 
@@ -93,6 +99,8 @@ class candidate {
 
   candidates.push(PedroCosta);
   candidates.push(FernandaRocha);
+
+  // Filtando candidatos pelas suas habilidades.
 
 const filterCandidatesBySkills = (jobId) => {
 
@@ -127,6 +135,7 @@ const filterCandidatesBySkills = (jobId) => {
     return approvedCandidates;
 };
 
+// Texto com os candidatos aprovados e com a porcentagem de compatibilidade com cada vaga.
 
    for (const job of jobs) {
     const approvedCandidates = filterCandidatesBySkills(job.id);
@@ -159,6 +168,9 @@ const filterCandidatesBySkills = (jobId) => {
         }
   
     });
+
+    //Mensagem que irá aparecer dos candidatos que não foram aprovados e as competências que estão faltando.
+
         console.log ('------------------------')
          console.log ('Candidatos não aprovados:')
 
@@ -180,6 +192,9 @@ const filterCandidatesBySkills = (jobId) => {
           console.log ("-----------")
         });
       }
+
+  // Criação de uma Promise
+
   const searchCandidateByJob = (jobId) => {
     return new Promise ((resolve) => {
     setTimeout (() => {

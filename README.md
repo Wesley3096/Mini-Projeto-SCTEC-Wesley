@@ -1,6 +1,10 @@
 # Mini projeto SCTEC
 - Criação de um simulador de vagas para desenvolvedores Jr.
 
+- O simulador busca filtrar os candidatos de acordo com os requisitos mínimos para cada vaga. Após isso, cria uma lista com os candidatos aprovados e filtra os reprovados trazendo a informação das competências necessárias que estão faltando para a aprovação.
+
+- As vagas, empresas e candidatos são fictícias e foram criadas apenas para a elaboração do projeto.
+
 # Tecnologias arbodadas
 ## JavaScript
 
