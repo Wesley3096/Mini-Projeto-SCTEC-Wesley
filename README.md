@@ -21,12 +21,20 @@
 - Callback
 - Closure
 - Promise
-- Async/await
+
 
 # Como executar 
 - Baixe o projeto no Github
 - Abra o VSCode
 - Execute o arquivo
+
+# Porcentual de canditados para a vaga
+- O percentual foi classificado conforme o exercício proposto.
+-80 a 100 - Alta compatibilidade.
+-50 a 80 - Média compatibilidade.
+-0 a 49 - Baixa compatibilidade.
+
+-Usei uma função para verificar os candidatos que estão aptos para as vagas, se as suas qualificações tiver no mínimo 5 requisitos, os candidatos são aprovados. Se não atender aos  requisitos,os candidatos recebem uma informação com o que precisam estudar para conseguir a aprovação. 
 
 # Desenvolvedor
 - Wesley Vieira

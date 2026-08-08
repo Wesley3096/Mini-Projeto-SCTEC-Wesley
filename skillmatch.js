@@ -116,38 +116,54 @@ const approvedCandidates = candidates.filter(candidate => {
   ){
     return true;
     }
-    return false;
+   
 });
+ 
 
   return approvedCandidates;
 }
 
-for (const job of jobs) {
+   for (const job of jobs) {
     const approvedCandidates = filterCandidatesBySkills(job.id);
     console.log(`Vaga: ${job.title}`);
-    console.log(`Candidatos aprovados: ${approvedCandidates.length}`);
     console.log('-----------------------------');
+    console.log(`Candidatos aprovados: ${approvedCandidates.length}`);
     console.log(`Candidatos aprovados para a vaga "${job.title}" na empresa: ` + ` ${job.company}`);
 
     const calculateMatchPercentage = (candidateSkills, jobRequirements) => {
         const matchingSkills = jobRequirements.filter(skill => candidateSkills.includes(skill));
         return MatchPercentage = (matchingSkills.length / jobRequirements.length) * 100;
-    }
+    };
 
     approvedCandidates.forEach(candidate => {
         const percentage = calculateMatchPercentage(candidate.skills, job.requirements);
-        console.log(`- ${candidate.name} - Compatibilidade : ${percentage.toFixed(1)}%`);
+     
 
         if (percentage >= 80) {
           console.log (`${candidate.name} - ${percentage.toFixed(1)}% - Alta compatibilidade`);
         }
 
         else if (percentage >= 50 && percentage < 80) {
-          console.log (`${candidate.name} - ${percentage.toFixed(1)}% - Média compatibilidade`);
+          console.log (`${candidate.name} - ${percentage.toFixed(1)}% - Média compatibilidade - Sugiro estudar sobre as tecnologias exigidas na vaga`);
         }
 
         else {
-          console.log (`${candidate.name} - ${percentage.toFixed(1)}% - Baixa compatibilidade`);
+          console.log (`${candidate.name} - ${percentage.toFixed(1)}% - Baixa compatibilidade - Sugiro estudar sobre as tecnologias exigidas na vaga`);
         }
+  
+            const missingSkills = job.requirements.filter(skill => !candidate.skills.includes (skill));
+  console.log('-----------------------------');
+    console.log (`${candidate.name} não possui as habilidades necessárias para a vaga ${job.title} na empresa ${job.company}. Habilidades necessárias: ${missingSkills.join(",")}`);
+
+  return false;
     });
   }
+  
+  const searchCandidateByJob = (jobId) => {
+    return new Promise ((resolve) => {
+    setTimeout (() => {
+      const approvedCandidates = filterCandidatesBySkills (jobId);
+      resolve (approvedCandidates);
+    }, 2000);
+  });
+}
